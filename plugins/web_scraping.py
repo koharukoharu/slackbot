@@ -21,7 +21,9 @@ def Web_scraping():
             if info:
                 yield info
 
+
 def web_main(rosen_name):
+    text_return = ""
     for info in Web_scraping():
         rosen = info[0]
         jokyo = info[1]
@@ -31,7 +33,12 @@ def web_main(rosen_name):
             text = "-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*\n" + \
                     rosen + "は" + jokyo + "です。\n" + \
                     "詳細：" + joho + "\n"
-        return text
+            text_return = text_return + text
+    if text_return == "":
+        text_return = "検索結果無し"
+    elif len(text_return) >= 10000:
+        text_return = "検索結果が多すぎます"
+    return text_return 
 
 if __name__ == "__main__":
     pass

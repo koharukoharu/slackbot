@@ -24,9 +24,9 @@ def Train_search_name(name):
     except:
         text = '検索に失敗しました'
     finally:
-        return text
-        conn.close()
         cur.close()
+        conn.close()
+        return text
 
 # エリアによる検索
 def Train_search_area(area):
@@ -37,8 +37,6 @@ def Train_search_area(area):
     except:
         text = '検索に失敗しました'
     finally:
-        return text
-        conn.close()
         cur.close()
-
-
+        conn.close()
+        return text

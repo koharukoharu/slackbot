@@ -27,11 +27,10 @@ def mention_station_func(message):
     temp, message_name = text.split(None, 1)
     if message_name == "北海道" or message_name == "東北" or message_name == "関東" or message_name == "近畿"\
      or message_name == "東海" or message_name == "四国" or message_name == "九州" or message_name == "中部" or message_name == "中国":
-        text = Train_search_area(message_name)
+        text_train = Train_search_area(message_name)
     else:
-        text = Train_search_name(message_name)
-        scraping_text = web_main(text)
-    message.send(scraping_text)
+        text_train = web_main(message_name)
+    message.send(text_train)
 
 #指定地域の天気情報を教えてくれる機能
 @respond_to(r'^天気\s+\S.*')
@@ -59,7 +58,7 @@ def mention_wether_func(message):
 #アイコン設定
     telop_icon = ''
     if telop.find('雪') > -1:    
-        telop_icon = ':showman:'
+        telop_icon = ':snowman:'
     elif telop.find('雷') > -1:
         telop_icon = ':thinder_cloud_and_rain:'
     elif telop.find('晴') > -1:
