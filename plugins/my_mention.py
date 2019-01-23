@@ -10,7 +10,7 @@ import urllib.request
 import datetime
 import lxml
 
-from plugins.web_scraping import web_main, Web_scraping
+from plugins.web_scraping import web_main, Web_scraping, web_area_main
 from plugins.train_sql import Train_search_area, Train_search_name
 
 #今日の日時を教えてくれる機能
@@ -27,9 +27,11 @@ def mention_station_func(message):
     temp, message_name = text.split(None, 1)
     if message_name == "北海道" or message_name == "東北" or message_name == "関東" or message_name == "近畿"\
      or message_name == "東海" or message_name == "四国" or message_name == "九州" or message_name == "中部" or message_name == "中国":
-        text_train = Train_search_area(message_name)
+        text_search = Train_search_area(message_name)
+        text_train = web_area_main(text_search, message_name)
+        print(text_train)
     else:
-        text_train = web_main(message_name)
+        text_train = web_main(message_name, "4/")   
     message.send(text_train)
 
 #指定地域の天気情報を教えてくれる機能

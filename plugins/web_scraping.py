@@ -2,11 +2,11 @@ import urllib.request
 import sys
 from bs4 import BeautifulSoup
 
-def Web_scraping():
+def Web_scraping(area_id):
 #路線指定の時はtrain_url3を繋げて、個別路線ページを抽出
 
     train_url1 = 'https://transit.yahoo.co.jp/traininfo/'
-    train_url2 = 'area/4/'
+    train_url2 = 'area/' + area_id
     train_url3 = ''
     train_url_all = train_url1 + train_url2
 
@@ -21,10 +21,35 @@ def Web_scraping():
             if info:
                 yield info
 
+def web_area_main(area_name, area_message):
+    if area_message == "北海道":
+        area_id = "2/"
+    elif area_message == "東北":
+        area_id = "3/"
+    elif area_message == "関東":
+        area_id = "4/"
+    elif area_message == "近畿":
+        area_id = "6/"
+    elif area_message == "東海":
+        area_id = "5/"
+    elif area_message == "四国":
+        area_id = "9/"
+    elif area_message == "九州":
+        area_id = "7/"
+    elif area_message == "中部":
+        area_id = "5/"
+    elif area_message == "中国":
+        area_id = "8/"
 
-def web_main(rosen_name):
+    area_name_search = area_name["name"]
+    for name_info in area_name_search:
+        text_return = text_return + web_main(name_info, area_id)
+
+    return text_return
+
+def web_main(rosen_name, area_id):
     text_return = ""
-    for info in Web_scraping():
+    for info in Web_scraping(area_id):
         rosen = info[0]
         jokyo = info[1]
         joho = info[2]

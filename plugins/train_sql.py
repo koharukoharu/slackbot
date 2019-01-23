@@ -15,7 +15,7 @@ database = url.path[1:]
 )
 cur = conn.cursor(dictionary=True)
 
-# 路線名による曖昧検索
+# 路線名による曖昧検索(使わなくてもよさそう)
 def Train_search_name(name):
     try:
         cur.execute("SELECT * FROM train_list where name Like '%%%s%%'" % (name))
@@ -30,7 +30,7 @@ def Train_search_name(name):
 
 # エリアによる検索
 def Train_search_area(area):
-    try:        
+    try:
         cur.execute("SELECT * FROM train_list where area = '%s'" % (area))
         text = cur.fetchall()
         text = json.dumps(text, ensure_ascii=False)
